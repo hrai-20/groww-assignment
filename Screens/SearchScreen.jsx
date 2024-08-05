@@ -76,7 +76,6 @@ const SearchScreen = ({navigation}) => {
         `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=UM6Q5QPBBLQ2BFSR`,
       );
       const stockDetail = res.data || {};
-      console.log('first', res);
       if (res?.data) {
         navigation.navigate('stock_detail', {
           stockDetail: stockDetail,

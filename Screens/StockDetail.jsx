@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,13 +12,13 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import LineGraph from '../components/LineGraph';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faArrowLeft, faStar} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-const StockDetail = ({ route }) => {
+const StockDetail = ({route}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const navigation = useNavigation();
   const stockDetail = route.params.stockDetail;
@@ -89,7 +89,7 @@ const StockDetail = ({ route }) => {
   }, [interval]);
 
   const formatValue = value => {
-    return value ? parseFloat(value).toFixed(2) : '0';
+    return value && value !== 'None' ? parseFloat(value).toFixed(2) : '0';
   };
 
   return (
@@ -167,10 +167,10 @@ const StockDetail = ({ route }) => {
           <Text>1Y</Text>
         </TouchableOpacity>
       </View>
-      <PriceRange 
-        low={formatValue(stockDetail['52WeekLow'])} 
-        current={formatValue(stockDetail.AnalystTargetPrice)} 
-        high={formatValue(stockDetail['52WeekHigh'])} 
+      <PriceRange
+        low={formatValue(stockDetail['52WeekLow'])}
+        current={formatValue(stockDetail.AnalystTargetPrice)}
+        high={formatValue(stockDetail['52WeekHigh'])}
       />
       <View style={styles.aboutContainer}>
         <Text style={styles.aboutTitle(isDarkMode)}>
@@ -212,7 +212,7 @@ const StockDetail = ({ route }) => {
   );
 };
 
-const PriceRange = ({ low, current, high }) => {
+const PriceRange = ({low, current, high}) => {
   const getPosition = () => {
     const lowValue = parseFloat(low);
     const highValue = parseFloat(high);
@@ -235,7 +235,7 @@ const PriceRange = ({ low, current, high }) => {
         <Text style={styles.priceValue}>${high}</Text>
       </View>
       <View style={styles.priceBar}>
-        <View style={[styles.currentPriceIndicator, { left: getPosition() }]} />
+        <View style={[styles.currentPriceIndicator, {left: getPosition()}]} />
       </View>
       <View style={styles.priceBarContainer}>
         <Text style={styles.priceLabel}>52-Week Low</Text>
